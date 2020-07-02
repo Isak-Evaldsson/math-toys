@@ -1,5 +1,3 @@
-function parse(string) {
-    expr = null
-    
-    return expr
+export function parse(string) {
+    return string;
 }
