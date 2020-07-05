@@ -34,7 +34,7 @@ function parseDivision(string) {
         if (x[0] === '(') {
             return parseAdditon(x.slice(1,x.length - 1))
         }
-        return parseInt(x)
+        return Number(x)
     })
 
     return factors.slice(1).reduce((a,b) => a / b, factors[0])
