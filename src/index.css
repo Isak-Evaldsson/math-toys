@@ -1,0 +1,57 @@
+
+
+.numBtn {
+    background-color: #e7e7e7;
+    border: none;
+    padding: 15px 15px;
+    display: inline-block;
+    font-size: 16px;
+    text-align: center;
+    margin: 2px 2px;
+    border-radius: 5%;
+    transition: 0.3s;
+    width: 100px;
+}
+
+.numBtn:hover {
+    background-color: #dddddd;
+}
+
+
+.opBtn {
+    background-color:gainsboro;
+    border: none;
+    padding: 15px 15px;
+    display: inline-block;
+    font-size: 16px;
+    text-align: center;
+    margin: 2px 2px;
+    border-radius: 5%;
+    transition: 0.3s;
+    width: 100px;
+}
+
+.opBtn:hover {
+    background-color: silver;
+}
+
+.eqBtn {
+    background-color:lightblue;
+    border: none;
+    padding: 15px 15px;
+    display: inline-block;
+    font-size: 16px;
+    text-align: center;
+    margin: 2px 2px;
+    border-radius: 5%;
+    transition: 0.3s;
+    width: 100px;
+}
+
+.eqBtn:hover {
+    background-color:lightskyblue;
+}
+
+#labelDiv {
+    min-height: 30;
+}
