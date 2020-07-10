@@ -3,6 +3,15 @@ import ReactDOM from 'react-dom';
 import {parse} from './parser.js'
 import './index.css'
 
+
+function CalulcatorBtn(props) {
+    return (
+        <button onClick={props.onClick} class={"calculatorBtn " + props.class}>
+            {props.value}
+        </button>
+    )
+}
+
 class Calulcator extends React.Component {
     constructor(props){
         super(props)
@@ -11,63 +20,52 @@ class Calulcator extends React.Component {
         }
     }
 
-    createOperatorButton(operator, type = 'numBtn') {
+    exprAddChar(char) {
+        return () => this.setState({expr: this.state.expr + char})
+    }
+
+    createCalculatorButton(number, type = "", lambda=null) {
         return (
-        <button class={type} onClick={() => {
-            const newExpr = this.state.expr + operator
-            this.setState({expr: newExpr})
-        }}>
-            {operator}
-        </button>
+            <CalulcatorBtn value={number} class={type} onClick={lambda == null ? this.exprAddChar(number): lambda}></CalulcatorBtn>
         )
     }
 
-    createFunctionButton(lambda, sign, type='opBtn') {
-        return (
-            <button class={type} onClick={lambda}>
-                {sign}
-            </button>
-        )
-    }
-   
     render() {
         const caluclate = () => this.setState({expr: parse(this.state.expr).toString(10)})
         const clear = () => this.setState({expr: this.state.expr.substring(0, this.state.expr.length - 1)})
 
         return (
             <div>
-                
-                <div id="labelDiv">
-                <label>{this.state.expr}</label>
+                <input type="text" id='exprField' value={this.state.expr} readOnly></input>
+                <div>
+                    {this.createCalculatorButton('(', 'operatorBtn')}
+                    {this.createCalculatorButton(')', 'operatorBtn')}
+                    {this.createCalculatorButton('CE', 'operatorBtn', clear)}
+                    {this.createCalculatorButton('Settings', 'operatorBtn', () => null)}
                 </div>
                 <div>
-                    {this.createOperatorButton('(', 'opBtn')}
-                    {this.createOperatorButton(')', 'opBtn')}
-                    {this.createFunctionButton(clear, 'CE')}
+                    {this.createCalculatorButton('7')}
+                    {this.createCalculatorButton('8')}
+                    {this.createCalculatorButton('9')}
+                    {this.createCalculatorButton('*', 'operatorBtn')}
                 </div>
                 <div>
-                    {this.createOperatorButton('7')}
-                    {this.createOperatorButton('8')}
-                    {this.createOperatorButton('9')}
-                    {this.createOperatorButton('*', 'opBtn')}
+                    {this.createCalculatorButton('4')}
+                    {this.createCalculatorButton('5')}
+                    {this.createCalculatorButton('6')}
+                    {this.createCalculatorButton('/', 'operatorBtn')}
                 </div>
                 <div>
-                    {this.createOperatorButton('4')}
-                    {this.createOperatorButton('5')}
-                    {this.createOperatorButton('6')}
-                    {this.createOperatorButton('/', 'opBtn')}
+                    {this.createCalculatorButton('1')}
+                    {this.createCalculatorButton('2')}
+                    {this.createCalculatorButton('3')}
+                    {this.createCalculatorButton('-', 'operatorBtn')}
                 </div>
                 <div>
-                    {this.createOperatorButton('1')}
-                    {this.createOperatorButton('2')}
-                    {this.createOperatorButton('3')}
-                    {this.createOperatorButton('-', 'opBtn')}
-                </div>
-                <div>
-                    {this.createOperatorButton('0')}
-                    {this.createOperatorButton('.')}
-                    {this.createFunctionButton(caluclate, '=', 'eqBtn')}
-                    {this.createOperatorButton('+')}
+                    {this.createCalculatorButton('0')}
+                    {this.createCalculatorButton('.')}
+                    {this.createCalculatorButton('=', 'equalBtn', caluclate)}
+                    {this.createCalculatorButton('+', 'operatorBtn')}
                 </div>
             </div>
            
