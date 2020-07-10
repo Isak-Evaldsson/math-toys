@@ -35,3 +35,10 @@
     width: 366px;
     padding: 15px;
 }
+
+#calculatorDiv {
+    padding: 10px;
+    width: fit-content;
+    border-radius: 2%;
+    border : thin solid #d3d3d3;
+}

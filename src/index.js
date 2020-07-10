@@ -35,7 +35,7 @@ class Calulcator extends React.Component {
         const clear = () => this.setState({expr: this.state.expr.substring(0, this.state.expr.length - 1)})
 
         return (
-            <div>
+            <div id='calculatorDiv'>
                 <input type="text" id='exprField' value={this.state.expr} readOnly></input>
                 <div>
                     {this.createCalculatorButton('(', 'operatorBtn')}
