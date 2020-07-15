@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {parse} from './parser.js'
+import Navbar from './navbar'
 import './index.css'
 
 
@@ -26,7 +27,7 @@ class Calulcator extends React.Component {
 
     createCalculatorButton(number, type = "", lambda=null) {
         return (
-            <CalulcatorBtn value={number} class={type} onClick={lambda == null ? this.exprAddChar(number): lambda}></CalulcatorBtn>
+            <CalulcatorBtn value={number} class={type} onClick={lambda == null ? this.exprAddChar(number): lambda}/>
         )
     }
 
@@ -74,6 +75,9 @@ class Calulcator extends React.Component {
 }
 
 ReactDOM.render(
-    <Calulcator/>,
+    <div>
+        <Navbar/>
+        <Calulcator/>
+    </div>,
     document.getElementById('root')
 );

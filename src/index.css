@@ -2,6 +2,10 @@
     --primary-color : #85144b;
 }
 
+body{
+    margin: 0px;
+}
+
 .calculatorBtn {
     background-color: #eeeeee;
     border: none;
