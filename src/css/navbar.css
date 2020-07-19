@@ -1,0 +1,32 @@
+:root{
+    --primary-color : #85144b;
+}
+
+
+
+
+#navbar {
+    background-color: var(--primary-color);
+    padding: 16px;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+ 
+}
+
+#navbar-title {
+    display: inline;
+}
+
+.navbar-item {
+    background-color: transparent;
+    font-family: inherit;
+    color: inherit;
+    font-size: 16px;
+    border: none;
+}
+
+
+.navbar-item:hover{
+    color: gainsboro;
+}
