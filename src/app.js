@@ -5,18 +5,14 @@ import {Navbar, NavbarItem} from './components/navbar'
 import {Calulcator} from './components/calculator'
 import './css/app.css'
 
-const foter = (
-    <h1>By Isak Evaldsson</h1>
-)
-
-
 function About() {
     return (
         <ul>
             <li>Github</li>
             <li>LinkedIn</li>
             <li>Contact Me</li>
-    </ul>)
+        </ul>
+    )
 }   
 
 function Header() {
@@ -27,16 +23,26 @@ function Header() {
     </Navbar>);
 }
 
+function Footer() {
+    return(
+        <div id='footer'>
+            By Isak Evaldsson. <a href='https://github.com/Isak-Evaldsson/math-toys'>Code@Github</a>
+        </div>
+    );
+}
+
 export function App() {
     return(
     <BrowserRouter>
-        <Header/>
-        <main>
-            <Switch>
-                <Route exact path='/' component={Calulcator}/>
-                <Route exact path='/about' component={About}/>
-            </Switch>
-        </main>
-        {foter}
+        <div id="page-container">
+            <Header/>
+            <div id='content-wrap'>
+                <Switch>
+                    <Route exact path='/' component={Calulcator}/>
+                    <Route exact path='/about' component={About}/>
+                </Switch>
+            </div>
+            <Footer/>
+        </div>
     </BrowserRouter>);
 }

@@ -1,8 +1,26 @@
 :root{
     --primary-color : #85144b;
+    --footer-size   : 1.5rem;
 }
 
 body{
     margin: 0px;
     
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: var(--footer-size);
+}
+
+#content-wrap {
+    padding-bottom: var(--footer-size);
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
 }
