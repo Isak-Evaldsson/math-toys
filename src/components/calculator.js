@@ -1,5 +1,5 @@
 import React from 'react';
-import {parse} from '../parser.js'
+import {parse} from '../scripts/parser.js'
 import '../css/calculator.css'
 
 function CalulcatorBtn(props) {
