@@ -3,18 +3,9 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import {Navbar, NavbarItem} from './components/navbar'
 import {Calulcator} from './components/calculator'
+import {MatrixCalculator} from './components/matrixCalculator'
 import './css/app.css'
-
-function About() {
-    return (
-        <ul>
-            <li>Github</li>
-            <li>LinkedIn</li>
-            <li>Contact Me</li>
-        </ul>
-    )
-}   
-
+  
 function CalculatorPage() {
     return (
         <div>
@@ -33,7 +24,7 @@ function Header() {
     return (
     <Navbar title='Math Toys'>
         <NavbarItem title='Caluclator' link='/'/>
-        <NavbarItem title='About' link='/about'/>
+        <NavbarItem title='Matrix Tools' link='/matrix'/>
     </Navbar>);
 }
 
@@ -53,7 +44,7 @@ export function App() {
             <div id='content-wrap'>
                 <Switch>
                     <Route exact path='/' component={CalculatorPage}/>
-                    <Route exact path='/about' component={About}/>
+                    <Route exact path='/matrix' component={MatrixCalculator}/>
                 </Switch>
             </div>
             <Footer/>
