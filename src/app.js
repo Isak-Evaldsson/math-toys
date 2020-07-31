@@ -15,6 +15,20 @@ function About() {
     )
 }   
 
+function CalculatorPage() {
+    return (
+        <div>
+            <Calulcator/>
+            <p>Planned features:</p>
+            <ul>
+                <li>History</li>
+                <li>Keybindings</li>
+                <li>More advanced functions i.e sin/cos, e, log</li>
+            </ul>
+        </div>
+    )
+}
+
 function Header() {
     return (
     <Navbar title='Math Toys'>
@@ -38,7 +52,7 @@ export function App() {
             <Header/>
             <div id='content-wrap'>
                 <Switch>
-                    <Route exact path='/' component={Calulcator}/>
+                    <Route exact path='/' component={CalculatorPage}/>
                     <Route exact path='/about' component={About}/>
                 </Switch>
             </div>

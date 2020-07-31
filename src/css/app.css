@@ -17,6 +17,7 @@ body{
 
 #content-wrap {
     padding-bottom: var(--footer-size);
+    margin: 15px 10px;
 }
 
 #page-container {
