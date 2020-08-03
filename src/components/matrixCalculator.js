@@ -1,4 +1,5 @@
 import React from 'react'
+import { createMatrix } from '../scripts/matrix_functions'
 
 
 class Matrix extends React.Component {
@@ -6,13 +7,8 @@ class Matrix extends React.Component {
         super(props)
         const rows = props.rows !== undefined ? props.rows : 2
         const cols = props.cols !== undefined ? props.cols : 2
-        
-        var matrix = [];
-        for(var i=0; i<rows; i++) {
-            matrix[i] = new Array(cols);
-        }   
 
-        this.state = {matrix: matrix}
+        this.state = {matrix: createMatrix(rows, cols)}
     }
 
     handleInput(event, row, col) {
@@ -57,6 +53,9 @@ class Matrix extends React.Component {
 
 
 export class MatrixCalculator extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
     render() {
         return (
