@@ -1,14 +1,44 @@
 import React from 'react'
 
-export class MatrixCalculator extends React.Component {
-    buildTable(row, col, intialValue) {
+
+class Matrix extends React.Component {
+    constructor(props) {
+        super(props)
+        const rows = props.rows !== undefined ? props.rows : 2
+        const cols = props.cols !== undefined ? props.cols : 2
+        
+        var matrix = [];
+        for(var i=0; i<rows; i++) {
+            matrix[i] = new Array(cols);
+        }   
+
+        this.state = {matrix: matrix}
+    }
+
+    handleInput(event, row, col) {
+        const val = event.target.value
+
+        if(isNaN(val)) {
+            alert('Invalid Number')
+        } else {
+            const matrix = this.state.matrix
+            matrix[row][col] = val.length !== 0 ? parseInt(val): undefined
+            this.setState({ matrix: matrix })
+        }
+    }
+
+    makeEntry(r, c) {
+        return <th><input type='text' pattern='[0-9]*' value={this.state.matrix[r][c]} size={3} onInput={event => this.handleInput(event, r, c)}/></th>    
+    }
+
+    render() {
         const rows = []
 
-        for (let i = 0; i < row; i++) {
+        for (let r = 0; r < this.state.matrix.length; r++) {
             const cols = []
 
-            for (let j = 0; j < col; j++) {
-            cols.push(<th>{intialValue}</th>)          
+            for (let c = 0; c < this.state.matrix[0].length; c++) {
+                cols.push(this.makeEntry(r, c))          
             }
 
             rows.push(<tr>{cols}</tr>) 
@@ -16,17 +46,14 @@ export class MatrixCalculator extends React.Component {
 
         return <table>{rows}</table>
     }
+}
 
+
+export class MatrixCalculator extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.buildTable(2,2, 1)}
-                +
-                {this.buildTable(2,2, 2)}
-                =
-                {this.buildTable(2,2, 3)}
-            </div>
+            <Matrix/>
         )
     }
 }
