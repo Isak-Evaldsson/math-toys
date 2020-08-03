@@ -32,7 +32,8 @@ class Matrix extends React.Component {
                 <input type='text' 
                 pattern='[0-9]*' 
                 value={this.state.matrix[r][c]} 
-                size={3} 
+                size={3}
+                disabled = {this.props.readOnly} 
                 onInput={event => this.handleInput(event, r, c)}/>
             </th>    
     }
@@ -59,7 +60,14 @@ export class MatrixCalculator extends React.Component {
 
     render() {
         return (
-            <Matrix/>
+            <div>
+                A: <Matrix/>
+                B: <Matrix/>
+                A + B: <Matrix readOnly = {true}/>
+                <button onClick={() => alert('Not implemented yet')}>
+                    Calculate
+                </button>
+            </div>
         )
     }
 }
