@@ -28,7 +28,13 @@ class Matrix extends React.Component {
     }
 
     makeEntry(r, c) {
-        return <th><input type='text' pattern='[0-9]*' value={this.state.matrix[r][c]} size={3} onInput={event => this.handleInput(event, r, c)}/></th>    
+        return <th>
+                <input type='text' 
+                pattern='[0-9]*' 
+                value={this.state.matrix[r][c]} 
+                size={3} 
+                onInput={event => this.handleInput(event, r, c)}/>
+            </th>    
     }
 
     render() {
