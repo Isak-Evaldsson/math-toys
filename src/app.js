@@ -4,6 +4,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Navbar, NavbarItem} from './components/navbar'
 import {Calulcator} from './components/calculator'
 import {MatrixCalculator} from './components/matrixCalculator'
+import {MatrixTools} from './components/matrixTools'
 import './css/app.css'
   
 function CalculatorPage() {
@@ -45,6 +46,7 @@ export function App() {
                 <Switch>
                     <Route exact path='/' component={CalculatorPage}/>
                     <Route exact path='/matrix' component={MatrixCalculator}/>
+                    <Route exact path='/mtools' component={MatrixTools}/>
                 </Switch>
             </div>
             <Footer/>
