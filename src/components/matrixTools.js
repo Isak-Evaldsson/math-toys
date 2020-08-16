@@ -72,11 +72,12 @@ class MatrixViewer extends React.Component {
 export class MatrixTools extends React.Component {
     constructor(props) {
         super(props)
+        const nbrOfMatrices = 2
 
         this.state = {
             calState : 1,
-            nbrOfMatrices : 2,
-            matrices: new Array(2)
+            nbrOfMatrices : nbrOfMatrices,
+            matrices: new Array(nbrOfMatrices)
         }
     }
 
@@ -96,14 +97,24 @@ export class MatrixTools extends React.Component {
         this.setState({calState: this.state.calState + 1})
     }
 
+    calculateResult() {
+        //Define op-prop: takes array of matrices and returns a new matrix, can be put in other class
+        const addOP = matrices => addMatrices(matrices[0], matrices[1])
+
+        return <>
+            <Matrix matrix={addOP(this.state.matrices)} readOnly={true} title='Result'/>
+            <button onClick={() => this.setState({calState: 1})}>New calculation</button>
+        </>    
+    }
+
     render() {
         switch(this.state.calState) {
             case 1:
-                return <MatrixSizeSelector size='2' setSize={(i,r,c) => this.setSize(i,r,c)} nextState={this.nextState.bind(this)}/>
+                return <MatrixSizeSelector size={this.state.nbrOfMatrices} setSize={(i,r,c) => this.setSize(i,r,c)} nextState={this.nextState.bind(this)}/>
             case 2:
                 return <MatrixViewer matrices={this.state.matrices} changeMatrixEntry={(i,r,c,v) => this.changeMatrixEntry(i,r,c,v)} nextState={this.nextState.bind(this)}/>
             case 3:
-                return <h1>Result</h1>    
+                return this.calculateResult()
             default:
                 return <h1>Error</h1>
         }
