@@ -4,7 +4,7 @@ import {Matrix} from './matrix'
 import '../css/matrix-tools.css'
 
 
-class SizeSelector extends React.Component {
+class MatrixSizeSelector extends React.Component {
     constructor(props) {
         super(props)
         this.state = {inputValueMatrix: createMatrix(props.size, 2, 2)}
@@ -12,9 +12,12 @@ class SizeSelector extends React.Component {
 
     handleChange(event, rowIndex, colIndex) {
         const inputValueMatrix = this.state.inputValueMatrix
-        inputValueMatrix[rowIndex][colIndex] = event.target.value
-        this.setState({inputValueMatrix: inputValueMatrix})
-
+        const value = event.target.value
+        
+        if(!isNaN(value) && parseInt(value) >= 0) {
+            inputValueMatrix[rowIndex][colIndex] = event.target.value
+            this.setState({inputValueMatrix: inputValueMatrix})
+        }
     }
 
     makeSelectorEntry(index) {
@@ -50,7 +53,21 @@ class SizeSelector extends React.Component {
     }
 }
 
+class MatrixViewer extends React.Component {
+    render() {
+        const components = []
 
+        for (let index = 0; index < this.props.matrices.length; index++) {
+            const changeEntries = (row, col, val) => this.props.changeMatrixEntry(index, row, col, val)
+
+            components.push(
+                <Matrix matrix={this.props.matrices[index]} title= {'Matrix ' + index + ': '} changeEntries={changeEntries}/>
+            )
+        }
+
+        return <>{components}<button onClick={() => this.props.nextState()}>Calculate</button></>
+    }
+}
 
 export class MatrixTools extends React.Component {
     constructor(props) {
@@ -69,6 +86,12 @@ export class MatrixTools extends React.Component {
         this.setState({matrices: matrices})
     }
 
+    changeMatrixEntry(index, row, col, val) {
+        const matrices = this.state.matrices
+        matrices[index][row][col] = val.length !== 0 ? parseInt(val): undefined
+        this.setState(matrices)
+    }
+
     nextState() {
         this.setState({calState: this.state.calState + 1})
     }
@@ -76,9 +99,11 @@ export class MatrixTools extends React.Component {
     render() {
         switch(this.state.calState) {
             case 1:
-                return <SizeSelector size='2' setSize={(i,r,c) => this.setSize(i,r,c)} nextState={this.nextState.bind(this)}/>
+                return <MatrixSizeSelector size='2' setSize={(i,r,c) => this.setSize(i,r,c)} nextState={this.nextState.bind(this)}/>
             case 2:
-                return <h1>Matrices</h1>
+                return <MatrixViewer matrices={this.state.matrices} changeMatrixEntry={(i,r,c,v) => this.changeMatrixEntry(i,r,c,v)} nextState={this.nextState.bind(this)}/>
+            case 3:
+                return <h1>Result</h1>    
             default:
                 return <h1>Error</h1>
         }
