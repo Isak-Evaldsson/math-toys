@@ -6,9 +6,7 @@ export class Matrix extends React.Component {
     handleInput(event, row, col) {
         const val = event.target.value
 
-        if(isNaN(val)) {
-            alert('Invalid Number')
-        } else {
+        if(!isNaN(val)) {
             this.props.changeEntries(row, col, val)
         }
     }
