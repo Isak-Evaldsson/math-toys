@@ -5,6 +5,7 @@ import {Navbar, NavbarItem} from './components/navbar'
 import {Calulcator} from './components/calculator'
 import {MatrixCalculator} from './components/matrixCalculator'
 import {MatrixTools} from './components/matrixTools'
+import {addMatrices} from './scripts/matrix_functions'
 import './css/app.css'
   
 function CalculatorPage() {
@@ -29,6 +30,12 @@ function Header() {
     </Navbar>);
 }
 
+function MatrixPage() {
+    const addOP = matrices => addMatrices(matrices[0], matrices[1])
+
+    return <MatrixTools operation={addOP} nbrOfMatrices='2'/>
+}
+
 function Footer() {
     return(
         <div id='footer'>
@@ -46,7 +53,7 @@ export function App() {
                 <Switch>
                     <Route exact path='/' component={CalculatorPage}/>
                     <Route exact path='/matrix' component={MatrixCalculator}/>
-                    <Route exact path='/mtools' component={MatrixTools}/>
+                    <Route exact path='/mtools' component={MatrixPage}/>
                 </Switch>
             </div>
             <Footer/>

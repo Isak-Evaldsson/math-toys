@@ -72,7 +72,7 @@ class MatrixViewer extends React.Component {
 export class MatrixTools extends React.Component {
     constructor(props) {
         super(props)
-        const nbrOfMatrices = 2
+        const nbrOfMatrices = props.nbrOfMatrices
 
         this.state = {
             calState : 1,
@@ -99,10 +99,9 @@ export class MatrixTools extends React.Component {
 
     calculateResult() {
         //Define op-prop: takes array of matrices and returns a new matrix, can be put in other class
-        const addOP = matrices => addMatrices(matrices[0], matrices[1])
 
         return <>
-            <Matrix matrix={addOP(this.state.matrices)} readOnly={true} title='Result'/>
+            <Matrix matrix={this.props.operation(this.state.matrices)} readOnly={true} title='Result'/>
             <button onClick={() => this.setState({calState: 1})}>New calculation</button>
         </>    
     }
