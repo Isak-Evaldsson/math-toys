@@ -15,7 +15,7 @@ class MatrixSizeSelector extends React.Component {
         const value = event.target.value
         
         if(!isNaN(value) && parseInt(value) >= 0) {
-            inputValueMatrix[rowIndex][colIndex] = value
+            inputValueMatrix[rowIndex][colIndex] = parseInt(value)
             this.setState({inputValueMatrix: inputValueMatrix})
         }
     }
@@ -82,9 +82,9 @@ export class MatrixTools extends React.Component {
     }
 
     setSize(index, nbrOfRows, nbrOfCols) {
-        /* const matrices = this.state.matrices
+        const matrices = this.state.matrices
         matrices[index] = createMatrix(nbrOfRows, nbrOfCols, 0)
-        this.setState({matrices: matrices}) */
+        this.setState({matrices: matrices})
     }
 
     nextState() {
