@@ -1,6 +1,6 @@
 import React from 'react'
-import { createMatrix, addMatrices } from '../scripts/matrix_functions'
-import {Matrix} from './matrix'
+import { createMatrix } from '../scripts/matrix_functions'
+import {MatrixComponent} from './matrix'
 import '../css/matrix-tools.css'
 
 
@@ -15,7 +15,7 @@ class MatrixSizeSelector extends React.Component {
         const value = event.target.value
         
         if(!isNaN(value) && parseInt(value) >= 0) {
-            inputValueMatrix[rowIndex][colIndex] = event.target.value
+            inputValueMatrix[rowIndex][colIndex] = value
             this.setState({inputValueMatrix: inputValueMatrix})
         }
     }
@@ -61,7 +61,7 @@ class MatrixViewer extends React.Component {
             const changeEntries = (row, col, val) => this.props.changeMatrixEntry(index, row, col, val)
 
             components.push(
-                <Matrix matrix={this.props.matrices[index]} title= {'Matrix ' + index + ': '} changeEntries={changeEntries}/>
+                <MatrixComponent matrix={this.props.matrices[index]} title= {'Matrix ' + index + ': '} changeEntries={changeEntries}/>
             )
         }
 
@@ -77,20 +77,14 @@ export class MatrixTools extends React.Component {
         this.state = {
             calState : 1,
             nbrOfMatrices : nbrOfMatrices,
-            matrices: new Array(nbrOfMatrices)
+            matrices: [createMatrix(3,3,2), createMatrix(3,3,0)]
         }
     }
 
     setSize(index, nbrOfRows, nbrOfCols) {
-        const matrices = this.state.matrices
+        /* const matrices = this.state.matrices
         matrices[index] = createMatrix(nbrOfRows, nbrOfCols, 0)
-        this.setState({matrices: matrices})
-    }
-
-    changeMatrixEntry(index, row, col, val) {
-        const matrices = this.state.matrices
-        matrices[index][row][col] = val.length !== 0 ? parseInt(val): undefined
-        this.setState(matrices)
+        this.setState({matrices: matrices}) */
     }
 
     nextState() {
@@ -101,17 +95,18 @@ export class MatrixTools extends React.Component {
         //Define op-prop: takes array of matrices and returns a new matrix, can be put in other class
 
         return <>
-            <Matrix matrix={this.props.operation(this.state.matrices)} readOnly={true} title='Result'/>
+            <MatrixComponent matrix={this.props.operation(this.state.matrices)} readOnly={true} title='Result'/>
             <button onClick={() => this.setState({calState: 1})}>New calculation</button>
         </>    
     }
 
     render() {
+
         switch(this.state.calState) {
             case 1:
                 return <MatrixSizeSelector size={this.state.nbrOfMatrices} setSize={(i,r,c) => this.setSize(i,r,c)} nextState={this.nextState.bind(this)}/>
             case 2:
-                return <MatrixViewer matrices={this.state.matrices} changeMatrixEntry={(i,r,c,v) => this.changeMatrixEntry(i,r,c,v)} nextState={this.nextState.bind(this)}/>
+                return <MatrixViewer matrices={this.state.matrices} nextState={this.nextState.bind(this)}/>
             case 3:
                 return this.calculateResult()
             default:
