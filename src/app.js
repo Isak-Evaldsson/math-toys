@@ -3,7 +3,6 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import {Navbar, NavbarItem} from './components/navbar'
 import {Calulcator} from './components/calculator'
-import {MatrixCalculator} from './components/matrixCalculator'
 import {MatrixTools} from './components/matrixTools'
 import {addMatrices} from './scripts/matrix_functions'
 import './css/app.css'
@@ -52,8 +51,7 @@ export function App() {
             <div id='content-wrap'>
                 <Switch>
                     <Route exact path='/' component={CalculatorPage}/>
-                    <Route exact path='/matrix' component={MatrixCalculator}/>
-                    <Route exact path='/mtools' component={MatrixPage}/>
+                    <Route exact path='/matrix' component={MatrixPage}/>
                 </Switch>
             </div>
             <Footer/>
