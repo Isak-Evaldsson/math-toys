@@ -65,7 +65,15 @@ class MatrixViewer extends React.Component {
             )
         }
 
-        return <>{components}<button onClick={() => this.props.nextState()}>Calculate</button></>
+        return <>
+            <div class='matrix-container'>
+                {components}
+            </div>
+            <div>
+            <button onClick={() => this.props.nextState()}>Calculate</button>
+            <button onClick={() => this.props.prevState()}>Back</button>
+            </div>
+         </>   
     }
 }
 
@@ -91,22 +99,34 @@ export class MatrixTools extends React.Component {
         this.setState({calState: this.state.calState + 1})
     }
 
-    calculateResult() {
-        //Define op-prop: takes array of matrices and returns a new matrix, can be put in other class
+    prevState() {
+        this.setState({calState: this.state.calState - 1})
+    }
 
-        return <>
-            <MatrixComponent matrix={this.props.operation(this.state.matrices)} readOnly={true} title='Result'/>
-            <button onClick={() => this.setState({calState: 1})}>New calculation</button>
-        </>    
+
+    calculateResult() {
+        const newCalBtn= <button onClick={() => this.setState({calState: 1})}>New calculation</button>
+
+        try {
+            return <>
+                <MatrixComponent matrix={this.props.operation(this.state.matrices)} readOnly={true} title='Result'/>
+                {newCalBtn}
+            </>   
+        }
+        catch(err) {
+            return <>
+                <p>{err.message}</p>
+                {newCalBtn}
+                <button onClick={() => this.prevState()}>Edit calculation</button></>
+        }
     }
 
     render() {
-
         switch(this.state.calState) {
             case 1:
                 return <MatrixSizeSelector size={this.state.nbrOfMatrices} setSize={(i,r,c) => this.setSize(i,r,c)} nextState={this.nextState.bind(this)}/>
             case 2:
-                return <MatrixViewer matrices={this.state.matrices} nextState={this.nextState.bind(this)}/>
+                return <MatrixViewer matrices={this.state.matrices} nextState={this.nextState.bind(this)}  prevState={this.prevState.bind(this)}/>
             case 3:
                 return this.calculateResult()
             default:
