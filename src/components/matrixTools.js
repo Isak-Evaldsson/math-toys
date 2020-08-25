@@ -77,7 +77,7 @@ export class MatrixTools extends React.Component {
         this.state = {
             calState : 1,
             nbrOfMatrices : nbrOfMatrices,
-            matrices: [createMatrix(3,3,2), createMatrix(3,3,0)]
+            matrices: []
         }
     }
 
