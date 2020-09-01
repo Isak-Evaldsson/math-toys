@@ -29,7 +29,7 @@ function Transpose() {
 }
 
 function Determinat() {
-    const detOP = matrices => math.det(matrices[0])
+    const detOP = matrices => [[math.det(matrices[0])]]
 
     return <MatrixTools operation={detOP} nbrOfMatrices='1'/>
 }
